@@ -6,11 +6,11 @@ milestone: unscheduled
 timestamp: 2026-10-20
 ---
 
-# 計画作成中に判明した未決事項（PO 判断待ち）
+# 追加決定事項（計画作成時の確認項目）
 
-## N-C1 終日予定の型フィールド（D-09 の具体化）
+PO 回答により **2026-10-20** に確定。未決のまま残っている項目は現状なし。
 
-`events-layout.md` は Instant + `allDay` だが、D-09 は LocalDate 範囲を正とする。
+## N-C1 終日予定の型フィールド（D-09 の具体化）— 決定済み（2026-10-20 PO 回答）
 
 | 案 | 内容 |
 |----|------|
@@ -18,7 +18,7 @@ timestamp: 2026-10-20
 | B | Instant + `allDay` のみ。解釈は呼び出し元 TZ の 0:00〜翌 0:00 |
 | C | LocalDate と Instant を常に両方必須 |
 
-**推奨: A。** D-09 と「TZ で日付がずれない」を満たす。B は表示ずれリスク。
+**決定: A。** 終日予定は `startDate` / `endDate`（`LocalDate`）を**必須フィールド**にする。`endDate` は排他。Instant（`start`/`end`）は派生または省略可。
 
 ----
 

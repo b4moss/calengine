@@ -17,7 +17,7 @@ timestamp: 2026-10-20
 ```
 src/
   events/
-    types.ts            # CalendarEvent（終日の正規は LocalDate — N-C1）
+    types.ts            # CalendarEvent（終日は startDate/endDate 必須 — N-C1 決定）
     overlap.ts
     split.ts            # 複数日・週境界
     lanes.ts            # start → 長い → id = D-14
@@ -30,9 +30,26 @@ src/
 
 ## API / 型
 
-`events-layout.md` の Instant ベースに加え、**終日は LocalDate 範囲を正**（D-09）。具体フィールド形は N-C1（推奨: `allDay` + `startDate`/`endDate` 排他、Instant は派生または省略可）。
+**終日は LocalDate 範囲を正**（D-09 / **N-C1 決定**）:
 
-レーン順: `start` 昇順 → 期間長い順 → `id` 昇順（D-14）。
+```ts
+interface CalendarEvent {
+  id: string
+  title?: string
+  allDay: boolean
+  /** allDay === false のとき必須（epoch ms、end 排他） */
+  start?: number
+  end?: number
+  /** allDay === true のとき必須（endDate 排他） */
+  startDate?: LocalDate
+  endDate?: LocalDate
+}
+```
+
+- `allDay: true` → `startDate` / `endDate` **必須**。Instant は派生または省略可
+- `allDay: false` → `start` / `end` Instant 必須
+
+レーン順: Instant イベントは `start` 昇順 → 期間長い順 → `id` 昇順。終日は `startDate` 昇順 → 期間長い順 → `id`（D-14）。
 
 ## 実装ステップ
 
@@ -46,7 +63,7 @@ src/
 
 | リスク | 緩和 |
 |--------|------|
-| 終日の型が Instant のみだと TZ ずれ | N-C1 で LocalDate 正規を確定 |
+| 終日の TZ ずれ | N-C1 決定: `startDate`/`endDate` 必須で日付を固定 |
 | レーン非決定性 | ソートキーをテスト固定 |
 
 ## 受け入れ対応

@@ -18,21 +18,24 @@ UI の表示形式から独立させる。
 interface CalendarEvent {
   id: string
   title?: string
-  start: number // Instant (epoch ms)
-  end: number   // Instant (epoch ms), 排他
   allDay: boolean
+  /** allDay === false のとき必須（epoch ms、end 排他） */
+  start?: number
+  end?: number
+  /** allDay === true のとき必須（LocalDate、endDate 排他）— N-C1 決定 */
+  startDate?: LocalDate
+  endDate?: LocalDate
 }
 ```
 
 要件:
 
-- `start < end` 必須。終了は排他
+- 時刻指定: `start < end` 必須。終了は排他
+- 終日: `startDate` / `endDate` **必須**（`endDate` 排他）。Instant は派生または省略可（N-C1 / D-09）
 - 終日と時刻指定を `allDay` で区別
 - 永続化・API・認証は担当しない
 - 色・フォント・DOM を必須フィールドにしない
 - ID 生成は担当しない
-
-終日予定の正規表現は U-05 決定どおり、日付ベースの `LocalDate` 範囲を正とし、Instant は派生とする（TZ 変換で日付がずれない設計）。
 
 ## 配置計算が返すもの
 

@@ -64,7 +64,7 @@ timestamp: 2026-10-20
 | 日付モデル | `LocalDate` / `LocalDateTime` / `Instant` / IANA `TimeZone` |
 | 範囲 | 半開区間 `[start, end)` |
 | 月末加算 | 対象月の末日にクランプ |
-| 終日予定 | `LocalDate` 範囲を正。Instant は派生 |
+| 終日予定 | `startDate` / `endDate`（LocalDate）必須（N-C1）。Instant は派生または省略可 |
 | DST | 存在しない→直後、重複→早い方。厳密モードはオプション |
 | レーン順 | `start` 昇順 → 長い順 → `id` 昇順 |
 | モジュール | ESM + 型定義のみ |

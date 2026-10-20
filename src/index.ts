@@ -1,5 +1,5 @@
 /**
- * @b4m/calengine public API — v0.2.0 date model & operations.
+ * @b4m/calengine public API — v0.3.0 adds calendar grids.
  */
 
 export { CalEngineError, type CalEngineErrorCode } from './errors.js'
@@ -63,3 +63,18 @@ export {
   getTimeZoneOffsetMs,
   type ZonedConvertOptions,
 } from './dst/resolve.js'
+
+export { type HolidayFlag, type IsHoliday } from './holidays/types.js'
+
+export type {
+  CalendarDay,
+  CalendarWeek,
+  MonthGrid,
+  MonthGridInput,
+  WeekGridInput,
+  YearGridInput,
+} from './grid/types.js'
+
+export { buildMonthGrid } from './grid/month.js'
+export { buildWeekGrid } from './grid/week.js'
+export { buildYearGrids } from './grid/year.js'

@@ -34,6 +34,7 @@ timestamp: 2026-10-20
 | **v0.2.0** | 未着手 | 日付モデル・基本演算 | [plans/v0.2.0/](plans/v0.2.0/) |
 | **v0.3.0** | 未着手 | 月・週・年グリッド | [plans/v0.3.0/](plans/v0.3.0/) |
 | **v0.4.0** | 未着手 | 予定配置・期間選択 | [plans/v0.4.0/](plans/v0.4.0/) |
+| **v0.4.1** | 未着手 | LocalDate 文字列変換（PO: patch） | [plans/v0.4.1/](plans/v0.4.1/) |
 | **v1.0.0** | 未着手 | API 安定・休日 IF・共有テスト | [plans/v1.0.0/](plans/v1.0.0/) |
 | **After-v1.0.0** | 未割当 | Go 移植など | [unscheduled/go-port.md](plans/unscheduled/go-port.md) |
 

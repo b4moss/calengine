@@ -1,5 +1,5 @@
 /**
- * @b4m/calengine public API — v0.4.0 adds event layout and range selection.
+ * @b4m/calengine public API — v0.4.1 adds LocalDate string format/parse.
  */
 
 export { CalEngineError, type CalEngineErrorCode } from './errors.js'
@@ -94,3 +94,5 @@ export {
   selectDateRange,
   normalizeDateRange as normalizeSelectionRange,
 } from './range/selection.js'
+
+export { formatLocalDate, parseLocalDate } from './ops/local-date-string.js'

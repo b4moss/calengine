@@ -30,10 +30,20 @@ timestamp: 2026-10-19
 | 領域 | 例（名前は仮） |
 |------|----------------|
 | 日付演算 | `addDays`, `addMonths`, `compareLocalDate`, … |
+| 文字列 | `formatLocalDate`, `parseLocalDate`（`YYYY-MM-DD` ↔ `LocalDate`。**v0.4.1 で公開**） |
 | 範囲 | `intersectDateRange`, `normalizeDateRange`, … |
 | グリッド | `buildMonthGrid`, `buildWeekGrid`, `buildYearGrids`, … |
 | 予定配置 | `layoutEvents`, … |
 | TZ | `zonedTimeToInstant`, `instantToZonedTime`, … |
+
+### LocalDate 文字列（v0.4.1）
+
+```ts
+function formatLocalDate(date: LocalDate): string
+function parseLocalDate(iso: string): LocalDate
+```
+
+公開 API の追加だが、PO 判断（2026-10-20）により **patch `v0.4.1`** として扱う。
 
 ## エラー
 

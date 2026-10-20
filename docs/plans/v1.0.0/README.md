@@ -35,7 +35,7 @@ timestamp: 2026-10-19
 | [api.md](api.md) | 公開 API 方針 |
 | [testing.md](testing.md) | 必須テストケース |
 | [portability.md](portability.md) | Go 共有仕様・JSON フィクスチャ |
-| [open-questions.md](open-questions.md) | 未決項目 |
+| [open-questions.md](open-questions.md) | 決定済み項目（旧・未決） |
 
 ## 関連パッケージ
 
@@ -44,7 +44,8 @@ timestamp: 2026-10-19
 
 ## 公開方針（v1）
 
-- パッケージ名の意向（PO 初期 README）: `@b4moss/calengine`（作業上の呼称 `@b4m/calengine` との差は U-01）
+- パッケージ名: `@b4m/calengine`（社内 Gitea レジストリ。公開時に `@b4moss/calengine` へ移す。U-01 決定済み）
+- 当面は社内のみ。npmjs 公開は個別判断
 - SemVer。`v0.x` 中は破壊的変更を許容。`v1.0.0` は PO 判断（憲章 versioning-rule）
 
 ----

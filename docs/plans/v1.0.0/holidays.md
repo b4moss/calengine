@@ -27,7 +27,7 @@ type IsHoliday = (date: LocalDate) => HolidayFlag
 ```
 
 - 未提供時: グリッド等では `'unknown'` または「未判定」扱い（`isHoliday: false` と混同しない）
-- 詳細形は U-08
+- 形は U-08 決定どおり `(date) => boolean | 'unknown'`。harenohi は必須依存にしない
 
 ## やらないこと
 

@@ -54,7 +54,7 @@ Go 移植時は `time.Time` 等へ対応させる（[portability.md](portability
 
 IANA Time Zone Database の識別子（例: `Asia/Tokyo`）。
 
-ローカル日時 ↔ Instant の変換は**明示的操作**とする。DST による存在しない時刻・重複時刻は [open-questions.md](open-questions.md) U-06。
+ローカル日時 ↔ Instant の変換は**明示的操作**とする。DST による存在しない時刻・重複時刻は [open-questions.md](open-questions.md) U-06（決定: 存在しない→直後、重複→早い方。厳密モードはオプション）。
 
 ## 日付範囲・日時範囲
 

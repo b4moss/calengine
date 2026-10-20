@@ -29,6 +29,11 @@ PO 回答により **2026-10-20** に確定。未決のまま残っている項�
 
 **推奨: A。** final-calendar が計画書の型・関数名に合わせて並行実装中のため、計画書（api.md / 各 implementation-plan）の名称を公開 API として固定する。PO 判断は不要と判断し A で進める。
 
+## N-P1 `formatLocalDate` / `parseLocalDate` の版番号 — 決定済み（2026-10-20 PO 指示）
+
+公開 API の追加だが、PO 判断により **patch `v0.4.1`** として扱う（通常なら MINOR 相当の追加を patch に落とす）。final-calendar の重複実装排除が目的。
+
 ----
 
 以上
+

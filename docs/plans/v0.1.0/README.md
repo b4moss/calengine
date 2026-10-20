@@ -28,6 +28,11 @@ UI 非依存の TypeScript パッケージとして、実装を載せる器を�
 
 - なし
 
+## 詳細
+
+- 実装計画: [implementation-plan.md](implementation-plan.md)
+- テスト仕様: [../../tests/v0.1.0/](../../tests/v0.1.0/)
+
 ----
 
 以上

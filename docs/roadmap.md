@@ -11,6 +11,10 @@ timestamp: 2026-10-20
 
 ## 現状
 
+- 各 v0.x.0（v1.0.0 直前まで）に実装計画書（`plans/v0.x.0/implementation-plan.md`）とマイルストーンテスト仕様（`tests/v0.x.0/`）を追加
+
+- 各 v0.x.0 に [implementation-plan](plans/) と [tests/v0.x.0](tests/) を追加（v1.0.0 直前まで）
+
 - charter（OKF v0.1 / VERSION 1.2.0 相当）取り込み済み
 - PO 決定（2026-10-20）反映済み
 - `.npmrc` / `.devcontainer` 配置済み（実装コードは未着手）

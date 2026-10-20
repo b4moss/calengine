@@ -27,6 +27,11 @@ timestamp: 2026-10-20
 - **前提:** v0.3.0
 - **利用側:** final-calendar の週表示・イベント機能
 
+## 詳細
+
+- 実装計画: [implementation-plan.md](implementation-plan.md)
+- テスト仕様: [../../tests/v0.4.0/](../../tests/v0.4.0/)
+
 ----
 
 以上

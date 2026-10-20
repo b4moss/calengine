@@ -28,6 +28,11 @@ timestamp: 2026-10-20
 - **前提:** v0.2.0
 - **利用側:** `@b4m/final-calendar` の月表示（v0.2.0）が本版のグリッドを消費する想定。5/6 週の見た目揃えは表示側
 
+## 詳細
+
+- 実装計画: [implementation-plan.md](implementation-plan.md)
+- テスト仕様: [../../tests/v0.3.0/](../../tests/v0.3.0/)
+
 ----
 
 以上

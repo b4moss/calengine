@@ -14,7 +14,7 @@ timestamp: 2026-10-20
 
 ## 含む機能
 
-- [events-layout.md](../v1.0.0/events-layout.md): 終日は LocalDate 正規、レーン割り当て（start→長い→id）
+- [events-layout.md](../v1.0.0/events-layout.md): 終日は `startDate`/`endDate` 必須（N-C1）、レーン割り当て（start→長い→id）
 - [range-selection.md](../v1.0.0/range-selection.md)
 
 ## 受け入れ条件
@@ -26,6 +26,11 @@ timestamp: 2026-10-20
 
 - **前提:** v0.3.0
 - **利用側:** final-calendar の週表示・イベント機能
+
+## 詳細
+
+- 実装計画: [implementation-plan.md](implementation-plan.md)
+- テスト仕様: [../../tests/v0.4.0/](../../tests/v0.4.0/)
 
 ----
 

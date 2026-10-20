@@ -28,6 +28,11 @@ timestamp: 2026-10-20
 
 - **前提:** v0.1.0
 
+## 詳細
+
+- 実装計画: [implementation-plan.md](implementation-plan.md)
+- テスト仕様: [../../tests/v0.2.0/](../../tests/v0.2.0/)
+
 ----
 
 以上

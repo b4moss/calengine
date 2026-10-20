@@ -11,6 +11,10 @@ timestamp: 2026-10-20
 
 ## 現状
 
+- 各 v0.x.0（v1.0.0 直前まで）に実装計画書（`plans/v0.x.0/implementation-plan.md`）とマイルストーンテスト仕様（`tests/v0.x.0/`）を追加
+
+- 各 v0.x.0 に [implementation-plan](plans/) と [tests/v0.x.0](tests/) を追加（v1.0.0 直前まで）
+
 - charter（OKF v0.1 / VERSION 1.2.0 相当）取り込み済み
 - PO 決定（2026-10-20）反映済み
 - `.npmrc` / `.devcontainer` 配置済み（実装コードは未着手）
@@ -70,7 +74,7 @@ timestamp: 2026-10-20
 | 項目 | 内容 |
 |------|------|
 | **目的** | 予定の配置計算と期間選択用の範囲処理 |
-| **含む機能** | 終日は LocalDate 範囲、レーン割り当て、複数日分割、期間選択ヘルパ |
+| **含む機能** | 終日は `startDate`/`endDate` 必須（N-C1）、レーン割り当て、複数日分割、期間選択ヘルパ |
 | **受け入れ** | [events-layout.md](plans/v1.0.0/events-layout.md) / [range-selection.md](plans/v1.0.0/range-selection.md) |
 | **依存** | v0.3.0。利用側: final-calendar のイベント／週表示 |
 | **詳細** | [plans/v0.4.0/](plans/v0.4.0/) |
@@ -93,7 +97,7 @@ timestamp: 2026-10-20
 |------|------|------|
 | npm スコープ・モジュール形式 | **決定**（2026-10-20） | [open-questions.md](plans/v1.0.0/open-questions.md) |
 | 月末・週番号・DST・レーン・休日 IF | **決定** | 同上 |
-| 終日は LocalDate 正規・グリッドは必要週のみ | **決定** | 同上 |
+| 終日は `startDate`/`endDate` 必須・グリッドは必要週のみ | **決定**（N-C1 含む） | [open-questions](plans/v1.0.0/open-questions.md) / [new-open-questions](plans/unscheduled/new-open-questions.md) |
 
 ----
 

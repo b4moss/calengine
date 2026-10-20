@@ -2,22 +2,17 @@
 title: "tests"
 type: Index
 status: draft
-timestamp: 2026-10-19
+timestamp: 2026-10-20
 ---
 
 # tests
 
-テスト仕様書の置き場（憲章 TDD）。実装版に入るときにドメイン別に書く。
-
-予定ドメイン例:
-
-- `date-model` — LocalDate / Instant / 範囲境界
-- `date-ops` — 加算・比較・月末丸め
-- `calendar-grid` — 月間・週間・年間グリッド
-- `event-layout` — 分割・レーン割り当て
-- `holidays` — 休日プロバイダの結合
-
-フォーマットは [charter/tdd.md](../charter/tdd.md) に従う。境界値は [plans/v1.0.0/testing.md](../plans/v1.0.0/testing.md) の必須ケースを起点にする。
+| パス | マイルストーン |
+|------|----------------|
+| [v0.1.0/](v0.1.0/) | スキャフォールド |
+| [v0.2.0/](v0.2.0/) | 日付モデル・演算 |
+| [v0.3.0/](v0.3.0/) | グリッド |
+| [v0.4.0/](v0.4.0/) | 予定配置・期間選択 |
 
 ----
 

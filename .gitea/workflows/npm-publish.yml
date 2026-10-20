@@ -1,0 +1,94 @@
+# Publish @b4m/calengine to Gitea Packages (b4m-packages npm registry).
+# Triggers on plain SemVer tags vX.Y.Z (suffix tags like v0.1.0-doc.1 are skipped).
+name: npm-publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version without v prefix (e.g. 0.1.0). Required for manual runs.'
+        required: true
+        default: ''
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve version / tag filter
+        id: meta
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            VERSION="${{ github.event.inputs.version }}"
+            VERSION="${VERSION#v}"
+          else
+            TAG="${GITHUB_REF_NAME}"
+            if [[ ! "${TAG}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "skip=true" >>"$GITHUB_OUTPUT"
+              echo "Skipping non-release tag: ${TAG}"
+              exit 0
+            fi
+            VERSION="${TAG#v}"
+          fi
+          if [[ ! "${VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Invalid version: ${VERSION}" >&2
+            exit 1
+          fi
+          echo "skip=false" >>"$GITHUB_OUTPUT"
+          echo "version=${VERSION}" >>"$GITHUB_OUTPUT"
+          echo "Publish version: ${VERSION}"
+
+      - name: Check secret
+        if: steps.meta.outputs.skip != 'true'
+        id: secret
+        env:
+          PACKAGE_REGISTRY_TOKEN: ${{ secrets.PACKAGE_REGISTRY_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [[ -n "${PACKAGE_REGISTRY_TOKEN:-}" ]]; then
+            echo "present=true" >>"$GITHUB_OUTPUT"
+          else
+            echo "present=false" >>"$GITHUB_OUTPUT"
+            echo "::error::PACKAGE_REGISTRY_TOKEN is not set. Create a Packages write token and add the repo secret."
+            exit 1
+          fi
+
+      - name: Setup Node
+        if: steps.meta.outputs.skip != 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Configure npm auth & version
+        if: steps.meta.outputs.skip != 'true'
+        env:
+          PACKAGE_REGISTRY_TOKEN: ${{ secrets.PACKAGE_REGISTRY_TOKEN }}
+          VERSION: ${{ steps.meta.outputs.version }}
+        run: |
+          set -euo pipefail
+          cat > .npmrc <<EOF
+          @b4m:registry=https://git.b4m.jp/api/packages/b4m-packages/npm/
+          //git.b4m.jp/api/packages/b4m-packages/npm/:_authToken=${PACKAGE_REGISTRY_TOKEN}
+          //git.b4m.jp/api/packages/b4m-packages/npm/:always-auth=true
+          EOF
+          npm version "${VERSION}" --no-git-tag-version --allow-same-version
+
+      - name: Install & build
+        if: steps.meta.outputs.skip != 'true'
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run build
+
+      - name: npm publish
+        if: steps.meta.outputs.skip != 'true'
+        run: |
+          set -euo pipefail
+          npm publish --access restricted

@@ -1,5 +1,5 @@
 /**
- * @b4m/calengine public API — v0.3.0 adds calendar grids.
+ * @b4m/calengine public API — v0.4.0 adds event layout and range selection.
  */
 
 export { CalEngineError, type CalEngineErrorCode } from './errors.js'
@@ -78,3 +78,19 @@ export type {
 export { buildMonthGrid } from './grid/month.js'
 export { buildWeekGrid } from './grid/week.js'
 export { buildYearGrids } from './grid/year.js'
+
+export type {
+  CalendarEvent,
+  EventLayoutSegment,
+  NormalizedEvent,
+  NormalizedTimedEvent,
+  NormalizedAllDayEvent,
+} from './events/types.js'
+
+export { normalizeEvent } from './events/normalize.js'
+export { layoutEvents, type LayoutEventsInput } from './events/layout.js'
+
+export {
+  selectDateRange,
+  normalizeDateRange as normalizeSelectionRange,
+} from './range/selection.js'

@@ -12,6 +12,7 @@ okf_version: "0.1"
 * [plans/](plans/) - これからやる内容
 * [specs/](specs/) - 現行仕様の正本（未実装のため現状は空）
 * [tests/](tests/) - テスト仕様（実装着手時に書く）
+* [_archived/](_archived/) - 削除仕様・歴史資料
 
 ## Charter Bundle
 

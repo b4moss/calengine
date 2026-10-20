@@ -2,25 +2,98 @@
 title: "roadmap"
 type: Hub
 status: draft
-timestamp: 2026-10-19
+timestamp: 2026-10-20
 ---
 
 # roadmap
 
-版・マイルストーン・進捗のハブ。詳細仕様の正本は各 `plans/` /（実装後）`specs/`。
+版一覧・目的・含む機能・受け入れ・依存のハブ。詳細仕様の正本は各 `plans/`。実装後の仕様正本は `specs/`（現状なし）。
 
-| 版 | 状態 | 要約 | 詳細 |
-|----|------|------|------|
-| v0.1.0 | 未着手 | リポジトリスキャフォールド、ビルド・Lint・テスト基盤 | [plans/v1.0.0/](plans/v1.0.0/) の前提 |
-| v0.2.0 | 未着手 | 日付モデル・基本日付演算・範囲処理 | [date-model.md](plans/v1.0.0/date-model.md) / [date-ops.md](plans/v1.0.0/date-ops.md) |
-| v0.3.0 | 未着手 | 月間・週間・年間グリッド、週番号、設定検証 | [calendar-grid.md](plans/v1.0.0/calendar-grid.md) |
-| v0.4.0 | 未着手 | 予定モデル・配置計算・期間選択 | [events-layout.md](plans/v1.0.0/events-layout.md) / [range-selection.md](plans/v1.0.0/range-selection.md) |
-| v1.0.0 | 未着手 | 休日インターフェース、公開 API 安定、共通テストフィクスチャ | [api.md](plans/v1.0.0/api.md) / [holidays.md](plans/v1.0.0/holidays.md) / [portability.md](plans/v1.0.0/portability.md) |
-| After-v1.0.0 | 未割当 | Go 移植本体、追加週番号方式 など | [unscheduled/go-port.md](plans/unscheduled/go-port.md) |
+## 現状
 
-進捗の更新はこの表の「状態」列のみでよい。受け入れ条件の正本は plans 側。
+- charter（OKF v0.1 / VERSION 1.2.0 相当）取り込み済み
+- PO 決定（2026-10-20）反映済み
+- `.npmrc` / `.devcontainer` 配置済み（実装コードは未着手）
+- **次の実装マイルストーン**: [v0.1.0](plans/v0.1.0/)
+- 実装順（PO）: **日付演算 → グリッド生成 → 予定配置計算**
 
-実装順（PO 初期指示）: **日付演算 → グリッド生成 → 予定配置計算**。
+## バージョニング方針
+
+- SemVer。`v0.x` 中は破壊的変更可（[versioning-rule](charter/versioning-rule.md)）
+- タグは `main` に打つ
+
+## 実装計画（版一覧）
+
+| 版 | 状態 | 目的（一言） | 詳細 |
+|----|------|--------------|------|
+| **v0.1.0** | 未着手 | パッケージ開発の器 | [plans/v0.1.0/](plans/v0.1.0/) |
+| **v0.2.0** | 未着手 | 日付モデル・基本演算 | [plans/v0.2.0/](plans/v0.2.0/) |
+| **v0.3.0** | 未着手 | 月・週・年グリッド | [plans/v0.3.0/](plans/v0.3.0/) |
+| **v0.4.0** | 未着手 | 予定配置・期間選択 | [plans/v0.4.0/](plans/v0.4.0/) |
+| **v1.0.0** | 未着手 | API 安定・休日 IF・共有テスト | [plans/v1.0.0/](plans/v1.0.0/) |
+| **After-v1.0.0** | 未割当 | Go 移植など | [unscheduled/go-port.md](plans/unscheduled/go-port.md) |
+
+---
+
+### v0.1.0 — スキャフォールド
+
+| 項目 | 内容 |
+|------|------|
+| **目的** | UI 非依存 TS パッケージの器を用意する |
+| **含む機能** | `@b4m/calengine` の package 骨格、TS / テスト / Lint、ESM+型のビルド骨格 |
+| **受け入れ** | 空でもテストと型チェックが緑。docs が辿れる |
+| **依存** | なし |
+| **詳細** | [plans/v0.1.0/](plans/v0.1.0/) |
+
+### v0.2.0 — 日付モデルと基本演算
+
+| 項目 | 内容 |
+|------|------|
+| **目的** | LocalDate / Instant / TimeZone と基本演算を確定する |
+| **含む機能** | 妥当性・比較・加減算・半開区間。月末は末日クランプ。ISO 週番号既定。DST ポリシー |
+| **受け入れ** | [date-model.md](plans/v1.0.0/date-model.md) / [date-ops.md](plans/v1.0.0/date-ops.md) の必須境界が単体で緑 |
+| **依存** | v0.1.0 |
+| **詳細** | [plans/v0.2.0/](plans/v0.2.0/) |
+
+### v0.3.0 — カレンダーグリッド
+
+| 項目 | 内容 |
+|------|------|
+| **目的** | 月間・週間・年間グリッドを返す |
+| **含む機能** | 必要週のみ（4〜6）。週開始・設定検証。ピクセル情報は返さない |
+| **受け入れ** | [calendar-grid.md](plans/v1.0.0/calendar-grid.md) どおり。5/6 週の見た目揃えは final-calendar 側 |
+| **依存** | v0.2.0。利用側: final-calendar v0.2.0 以降が月グリッドを消費 |
+| **詳細** | [plans/v0.3.0/](plans/v0.3.0/) |
+
+### v0.4.0 — 予定配置・期間選択
+
+| 項目 | 内容 |
+|------|------|
+| **目的** | 予定の配置計算と期間選択用の範囲処理 |
+| **含む機能** | 終日は LocalDate 範囲、レーン割り当て、複数日分割、期間選択ヘルパ |
+| **受け入れ** | [events-layout.md](plans/v1.0.0/events-layout.md) / [range-selection.md](plans/v1.0.0/range-selection.md) |
+| **依存** | v0.3.0。利用側: final-calendar のイベント／週表示 |
+| **詳細** | [plans/v0.4.0/](plans/v0.4.0/) |
+
+### v1.0.0 — 安定・休日 IF・移植準備
+
+| 項目 | 内容 |
+|------|------|
+| **目的** | 公開 API を安定させ、休日注入と Go 共有テストの土台を揃える |
+| **含む機能** | 休日プロバイダ IF、公開 API 文書化、JSON フィクスチャ方針 |
+| **受け入れ** | [plans/v1.0.0/README.md](plans/v1.0.0/README.md)。[testing.md](plans/v1.0.0/testing.md) の必須ケース |
+| **依存** | v0.4.0。harenohi は任意（プロバイダ実装の候補） |
+| **詳細** | [plans/v1.0.0/](plans/v1.0.0/) |
+
+---
+
+## 早期意思決定（ログ）
+
+| 議題 | 状態 | 正本 |
+|------|------|------|
+| npm スコープ・モジュール形式 | **決定**（2026-10-20） | [open-questions.md](plans/v1.0.0/open-questions.md) |
+| 月末・週番号・DST・レーン・休日 IF | **決定** | 同上 |
+| 終日は LocalDate 正規・グリッドは必要週のみ | **決定** | 同上 |
 
 ----
 

@@ -20,6 +20,15 @@ PO 回答により **2026-10-20** に確定。未決のまま残っている項�
 
 **決定: A。** 終日予定は `startDate` / `endDate`（`LocalDate`）を**必須フィールド**にする。`endDate` は排他。Instant（`start`/`end`）は派生または省略可。
 
+## N-I1 公開関数名の固定（api.md の仮名）— 実装時追記（2026-10-20）
+
+| 案 | 内容 |
+|----|------|
+| A | [api.md](../v1.0.0/api.md) の例どおり（`addDays` / `buildMonthGrid` / `layoutEvents` / `zonedTimeToInstant` 等） |
+| B | 実装時に別名へ寄せる |
+
+**推奨: A。** final-calendar が計画書の型・関数名に合わせて並行実装中のため、計画書（api.md / 各 implementation-plan）の名称を公開 API として固定する。PO 判断は不要と判断し A で進める。
+
 ----
 
 以上

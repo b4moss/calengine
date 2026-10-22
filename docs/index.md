@@ -10,7 +10,7 @@ okf_version: "0.1"
 * [roadmap.md](roadmap.md) - 版・マイルストーン・進捗のハブ
 * [wishlist.md](wishlist.md) - PO の個人メモ
 * [plans/](plans/) - これからやる内容
-* [specs/](specs/) - 現行仕様の正本（未実装のため現状は空）
+* [specs/](specs/) - 現行仕様の正本
 * [tests/](tests/) - テスト仕様（実装着手時に書く）
 * [_archived/](_archived/) - 削除仕様・歴史資料
 

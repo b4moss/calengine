@@ -11,7 +11,7 @@
 | [docs/README.md](docs/README.md) | 目的・スコープ・技術方針（pillar） |
 | [docs/roadmap.md](docs/roadmap.md) | 版・マイルストーン |
 | [docs/plans/](docs/plans/) | これからやる内容（未実装仕様） |
-| [docs/charter/](docs/charter/) | 開発憲章（[b4moss/charter](https://github.com/b4moss/charter) 由来） |
+| 開発憲章 | AGENTS.md の「開発憲章（charter）」節 → [b4moss/charter v1](https://github.com/b4moss/charter/tree/v1/docs/charter) |
 | [`.npmrc`](.npmrc) | `@b4m` → 社内 registry（トークンは環境変数） |
 | [`.devcontainer/`](.devcontainer/) | 開発コンテナ（Node 24） |
 

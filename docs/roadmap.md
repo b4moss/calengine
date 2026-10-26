@@ -11,8 +11,8 @@ timestamp: 2026-10-20
 
 ## 現状
 
-- v0.1.0〜v0.4.1 実装済み（社内レジストリ `@b4m/calengine`）
-- **2026-10-26**: npmjs.org 公開を決定（`@b4moss/calengine`）。準備は `chore/npmjs-publish-prep`。初版は現版 `0.4.1` のまま出す方針。ただし既存タグ `v0.4.1` は `publish.yml` 導入前のコミットを指すため、初版のタグは未決（おすすめは patch を上げて `v0.4.2`。[specs/ci-cd.md](specs/ci-cd.md) の「公開準備の状況」）
+- v0.1.0〜v0.4.1 実装済み（社内レジストリ `@b4m/calengine`）。`0.4.2` は npmjs 初回公開用のパッチ版上げ
+- **2026-10-26**: npmjs.org 公開を決定（`@b4moss/calengine`）。**決定（2026-10-26）：案 a、`0.4.2` で初回公開**（既存タグ `v0.4.1` は `publish.yml` 導入前を指すため）。詳細は [specs/ci-cd.md](specs/ci-cd.md) の「公開準備の状況」
 - GitHub `b4moss/calengine`（public、まだ空）と Environment `npm-publish` は作成済み。push mirror・npm トークン・公開は未実施（2026-10-26 時点）
 - 社内 `@b4m/calengine` は当面併存（`final-calendar` 移行は別タスク）
 - charter（OKF v0.1 / VERSION 1.2.0 相当）取り込み済み
@@ -33,7 +33,8 @@ timestamp: 2026-10-20
 | **v0.2.0** | 完了 | 日付モデル・基本演算 | [plans/v0.2.0/](plans/v0.2.0/) |
 | **v0.3.0** | 完了 | 月・週・年グリッド | [plans/v0.3.0/](plans/v0.3.0/) |
 | **v0.4.0** | 完了 | 予定配置・期間選択 | [plans/v0.4.0/](plans/v0.4.0/) |
-| **v0.4.1** | 完了 | LocalDate 文字列変換（PO: patch）／npmjs 初版候補 | [plans/v0.4.1/](plans/v0.4.1/) |
+| **v0.4.1** | 完了 | LocalDate 文字列変換（PO: patch） | [plans/v0.4.1/](plans/v0.4.1/) |
+| **v0.4.2** | 進行中 | npmjs.org 初回公開（機能変更なし） | — |
 | **v1.0.0** | 未着手 | API 安定・休日 IF・共有テスト | [plans/v1.0.0/](plans/v1.0.0/) |
 | **After-v1.0.0** | 未割当 | Go 移植など | [unscheduled/go-port.md](plans/unscheduled/go-port.md) |
 

@@ -10,13 +10,18 @@ describe('v0.1.0 scaffold', () => {
     expect(true).toBe(true)
   })
 
-  it('TC-SCAF-03: package name is @b4m/calengine', () => {
+  it('TC-SCAF-03: package name is @b4moss/calengine', () => {
     const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8')) as {
       name: string
       type?: string
+      license?: string
+      publishConfig?: { access?: string; registry?: string }
     }
-    expect(pkg.name).toBe('@b4m/calengine')
+    expect(pkg.name).toBe('@b4moss/calengine')
     expect(pkg.type).toBe('module')
+    expect(pkg.license).toBe('MIT')
+    expect(pkg.publishConfig?.access).toBe('public')
+    expect(pkg.publishConfig?.registry).toBeUndefined()
   })
 
   it('TC-SCAF-04: test environment has no DOM globals', () => {

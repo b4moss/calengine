@@ -11,15 +11,13 @@ timestamp: 2026-10-20
 
 ## 現状
 
-- 各 v0.x.0（v1.0.0 直前まで）に実装計画書（`plans/v0.x.0/implementation-plan.md`）とマイルストーンテスト仕様（`tests/v0.x.0/`）を追加
-
-- 各 v0.x.0 に [implementation-plan](plans/) と [tests/v0.x.0](tests/) を追加（v1.0.0 直前まで）
-
+- v0.1.0〜v0.4.1 実装済み（社内レジストリ `@b4m/calengine`）
+- **2026-10-26**: npmjs.org 公開を決定（`@b4moss/calengine`）。準備は `chore/npmjs-publish-prep`。初版は現版 `0.4.1` のまま出す
+- 社内 `@b4m/calengine` は当面併存（`final-calendar` 移行は別タスク）
 - charter（OKF v0.1 / VERSION 1.2.0 相当）取り込み済み
-- PO 決定（2026-10-20）反映済み
-- `.npmrc` / `.devcontainer` 配置済み（実装コードは未着手）
-- **次の実装マイルストーン**: [v0.1.0](plans/v0.1.0/)
-- 実装順（PO）: **日付演算 → グリッド生成 → 予定配置計算**
+- PO 決定（2026-10-20 / 2026-10-26）反映済み
+- **次の実装マイルストーン**: [v1.0.0](plans/v1.0.0/)
+- 実装順（PO）: **日付演算 → グリッド生成 → 予定配置計算**（v0.4.1 まで完了）
 
 ## バージョニング方針
 
@@ -30,11 +28,11 @@ timestamp: 2026-10-20
 
 | 版 | 状態 | 目的（一言） | 詳細 |
 |----|------|--------------|------|
-| **v0.1.0** | 未着手 | パッケージ開発の器 | [plans/v0.1.0/](plans/v0.1.0/) |
-| **v0.2.0** | 未着手 | 日付モデル・基本演算 | [plans/v0.2.0/](plans/v0.2.0/) |
-| **v0.3.0** | 未着手 | 月・週・年グリッド | [plans/v0.3.0/](plans/v0.3.0/) |
-| **v0.4.0** | 未着手 | 予定配置・期間選択 | [plans/v0.4.0/](plans/v0.4.0/) |
-| **v0.4.1** | 未着手 | LocalDate 文字列変換（PO: patch） | [plans/v0.4.1/](plans/v0.4.1/) |
+| **v0.1.0** | 完了 | パッケージ開発の器 | [plans/v0.1.0/](plans/v0.1.0/) |
+| **v0.2.0** | 完了 | 日付モデル・基本演算 | [plans/v0.2.0/](plans/v0.2.0/) |
+| **v0.3.0** | 完了 | 月・週・年グリッド | [plans/v0.3.0/](plans/v0.3.0/) |
+| **v0.4.0** | 完了 | 予定配置・期間選択 | [plans/v0.4.0/](plans/v0.4.0/) |
+| **v0.4.1** | 完了 | LocalDate 文字列変換（PO: patch）／npmjs 初版候補 | [plans/v0.4.1/](plans/v0.4.1/) |
 | **v1.0.0** | 未着手 | API 安定・休日 IF・共有テスト | [plans/v1.0.0/](plans/v1.0.0/) |
 | **After-v1.0.0** | 未割当 | Go 移植など | [unscheduled/go-port.md](plans/unscheduled/go-port.md) |
 
@@ -45,7 +43,7 @@ timestamp: 2026-10-20
 | 項目 | 内容 |
 |------|------|
 | **目的** | UI 非依存 TS パッケージの器を用意する |
-| **含む機能** | `@b4m/calengine` の package 骨格、TS / テスト / Lint、ESM+型のビルド骨格 |
+| **含む機能** | `@b4moss/calengine`（当時 `@b4m/calengine`）の package 骨格、TS / テスト / Lint、ESM+型のビルド骨格 |
 | **受け入れ** | 空でもテストと型チェックが緑。docs が辿れる |
 | **依存** | なし |
 | **詳細** | [plans/v0.1.0/](plans/v0.1.0/) |
@@ -97,6 +95,7 @@ timestamp: 2026-10-20
 | 議題 | 状態 | 正本 |
 |------|------|------|
 | npm スコープ・モジュール形式 | **決定**（2026-10-20） | [open-questions.md](plans/v1.0.0/open-questions.md) |
+| npmjs.org 公開（`@b4moss/calengine`、GitHub Actions + Trusted Publishing） | **決定**（2026-10-26） | [open-questions.md](plans/v1.0.0/open-questions.md) / [ci-cd.md](specs/ci-cd.md) |
 | 月末・週番号・DST・レーン・休日 IF | **決定** | 同上 |
 | 終日は `startDate`/`endDate` 必須・グリッドは必要週のみ | **決定**（N-C1 含む） | [open-questions](plans/v1.0.0/open-questions.md) / [new-open-questions](plans/unscheduled/new-open-questions.md) |
 

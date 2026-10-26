@@ -40,7 +40,7 @@ timestamp: 2026-10-19
 ## 関連パッケージ
 
 - 描画: `@b4m/final-calendar`（本パッケージを依存として使う）
-- 祝日: `@b4m/harenohi`（休日データの供給候補。本パッケージは依存しない）
+- 祝日: `@b4moss/harenohi` / `@b4m/harenohi`（休日データの供給候補。本パッケージは依存しない）
 
 ## 依存する先行版
 
@@ -48,7 +48,7 @@ timestamp: 2026-10-19
 
 ## 公開方針（v1）
 
-- パッケージ名: `@b4m/calengine`（社内 Gitea レジストリ。公開時に `@b4moss/calengine` へ移す。U-01 決定済み）
+- パッケージ名: npmjs `@b4moss/calengine`（公開決定 2026-10-26）。社内レジストリ `@b4m/calengine` は当面併存（U-01 / 追記）
 - 当面は社内のみ。npmjs 公開は個別判断
 - SemVer。`v0.x` 中は破壊的変更を許容。`v1.0.0` は PO 判断（憲章 versioning-rule）
 

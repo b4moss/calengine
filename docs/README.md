@@ -19,8 +19,8 @@ timestamp: 2026-10-20
 | パッケージ | 役割 | 依存 |
 |------------|------|------|
 | **calengine**（本パッケージ） | 日付演算・グリッド・予定配置。DOM / UI 非依存 | 祝日ライブラリに依存しない（休日は注入） |
-| **final-calendar**（[`@b4m/final-calendar`](https://git.b4m.jp/b4m-packages/final-calendar)） | Web Component による描画と操作 UI | **calengine を利用する**（逆依存なし） |
-| **harenohi**（[`@b4m/harenohi`](https://git.b4m.jp/b4m-packages/harenohi)） | 祝日の演算・照会 | 休日プロバイダ実装の候補。結合は利用側または final-calendar |
+| **final-calendar**（`@b4m/final-calendar`） | Web Component による描画と操作 UI | **calengine を利用する**（逆依存なし） |
+| **harenohi**（`@b4moss/harenohi` / `@b4m/harenohi`） | 祝日の演算・照会 | 休日プロバイダ実装の候補。結合は利用側または final-calendar |
 
 ## スコープ
 
@@ -68,8 +68,8 @@ timestamp: 2026-10-20
 | DST | 存在しない→直後、重複→早い方。厳密モードはオプション |
 | レーン順 | `start` 昇順 → 長い順 → `id` 昇順 |
 | モジュール | ESM + 型定義のみ |
-| 配布 | `@b4m/calengine` → 社内 Gitea npm。公開時に `@b4moss/calengine` へ |
-| レジストリ設定 | ルート [`.npmrc`](../.npmrc)（`${PACKAGE_REGISTRY_TOKEN}`） |
+| 配布 | npmjs `@b4moss/calengine`（public）。社内レジストリ `@b4m/calengine` は当面併存 |
+| レジストリ設定 | 社内 `@b4m` 向け: ルート [`.npmrc`](../.npmrc)（`${PACKAGE_REGISTRY_TOKEN}`）。`@b4moss` は npmjs 既定 |
 | 開発環境 | [`.devcontainer/`](../.devcontainer/)（Node 24） |
 | テスト | 憲章 TDD。DOM なし。可能なら JSON フィクスチャを Go と共有 |
 

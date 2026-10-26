@@ -1,18 +1,38 @@
 {
-  "name": "@b4m/calengine",
+  "name": "@b4moss/calengine",
   "version": "0.4.1",
   "description": "UI-agnostic calendar date math, grids, and event layout for B4M products.",
   "type": "module",
-  "license": "UNLICENSED",
+  "license": "MIT",
+  "author": "Kohki SHIKATA <kohki.shikata@gmail.com>",
+  "homepage": "https://github.com/b4moss/calengine",
   "repository": {
     "type": "git",
-    "url": "https://git.b4m.jp/b4m-packages/calengine.git"
+    "url": "git+https://github.com/b4moss/calengine.git"
   },
+  "bugs": {
+    "url": "https://github.com/b4moss/calengine/issues"
+  },
+  "keywords": [
+    "calendar",
+    "date",
+    "datetime",
+    "timezone",
+    "dst",
+    "grid",
+    "events",
+    "layout",
+    "typescript"
+  ],
   "engines": {
     "node": ">=24"
   },
   "files": [
-    "dist"
+    "dist",
+    "!dist/**/*.map",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md"
   ],
   "sideEffects": false,
   "main": "./dist/index.js",
@@ -24,8 +44,7 @@
     }
   },
   "publishConfig": {
-    "registry": "https://git.b4m.jp/api/packages/b4m-packages/npm/",
-    "access": "restricted"
+    "access": "public"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",

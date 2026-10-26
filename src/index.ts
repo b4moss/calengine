@@ -1,5 +1,5 @@
 /**
- * @b4m/calengine public API — v0.4.1 adds LocalDate string format/parse.
+ * @b4moss/calengine public API — v0.4.1 adds LocalDate string format/parse.
  */
 
 export { CalEngineError, type CalEngineErrorCode } from './errors.js'

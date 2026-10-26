@@ -2,12 +2,12 @@
 title: "tests-ci"
 type: TestSpec
 status: draft
-timestamp: 2026-10-22
+timestamp: 2026-10-26
 ---
 
 # CI ワークフロー契約
 
-`.gitea/workflows/ci.yml` と `.gitea/workflows/npm-publish.yml` をテキストとして読み、トリガー・スキップ条件・ステップ順を検証する。
+`.gitea/workflows/ci.yml`・`.gitea/workflows/npm-publish.yml`・`.github/workflows/publish.yml` をテキストとして読み、トリガー・スキップ条件・ステップ順・公開契約を検証する。
 
 | ID | 区分 | 対象 | 期待 |
 |----|------|------|------|
@@ -21,6 +21,9 @@ timestamp: 2026-10-22
 | TC-CI-08 | 正常 | `ci.yml` test ジョブ | `runs-on: ubuntu-latest`、`node-version: "24"` |
 | TC-CI-09 | 制約 | `ci.yml` | E2E（e2e / playwright）を含まない。手動実行は `workflow_dispatch` |
 | TC-CI-10 | 制約 | `npm-publish.yml` `on` | `push.tags: 'v*'` と `workflow_dispatch` のみ。`pull_request` は無い |
+| TC-CI-11 | 正常 | `npm-publish.yml` | 版の一致検査あり、`npm version` なし、`@b4m/calengine` と `--registry` あり |
+| TC-CI-12 | 正常 | `publish.yml` | `id-token: write`、タグ `v[0-9]+.[0-9]+.[0-9]+` のみ、`workflow_dispatch` なし |
+| TC-CI-13 | 正常 | `publish.yml` | 版一致検査、`environment: npm-publish`、`npm publish --access public --provenance`、`NPM_TOKEN` |
 
 ----
 

@@ -12,7 +12,7 @@ timestamp: 2026-10-20
 |----|------|------|------|----------|
 | TC-SCAF-01 | 正常 | テスト実行 | exit 0 | 空でも緑 |
 | TC-SCAF-02 | 正常 | 型チェック / ビルド | 成功 | |
-| TC-SCAF-03 | 正常 | package.json name | `@b4m/calengine` | D-00 |
+| TC-SCAF-03 | 正常 | package.json name | `@b4moss/calengine`（MIT / public） | D-00 / 2026-10-26 |
 | TC-SCAF-04 | 正常 | テスト環境 | DOM グローバルに依存しない | |
 
 ----

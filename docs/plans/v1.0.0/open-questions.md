@@ -20,6 +20,16 @@ PO レビューにより **2026-10-20** に確定。選択肢表は経緯のた�
 
 **決定: C（横断 D-00 の案 A）。** 当面 `@b4m/calengine` とし、社内 Gitea レジストリ（framewaku と同じ仕組み）で配布する。npmjs 公開時に `@b4moss/calengine` へ移す。
 
+### 追記 — npmjs.org 公開（2026-10-26 こうきさん決定）
+
+npmjs.org へ `@b4moss/calengine` として公開することを決定（準備 PR 時点の版は `0.4.1` のまま）。要点:
+
+- npm・GitHub リポとも **public**。`publishConfig.access: public`
+- ライセンス **MIT**
+- 公開は **GitHub Actions**（`.github/workflows/publish.yml`）＋ Trusted Publishing。初版のみ Environment secret `NPM_TOKEN`
+- 社内レジストリの `@b4m/calengine` は当面併存（`final-calendar` 移行は別タスク）
+- 同期は Gitea 正本 → GitHub push mirror（タグ含む）
+
 ## U-02 月末加算の丸め — 決定済み（2026-10-20 PO）
 
 | 案 | 内容 |

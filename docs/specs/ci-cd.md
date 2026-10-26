@@ -62,10 +62,30 @@ Trusted Publisher 登録例（パッケージ Settings、または `npm trust`�
 
 両者は独立する。一方の失敗は他方をロールバックしない。どちらかを再実行するときは、版がレジストリに既にある場合は skip される（npmjs）／社内側は失敗または手動判断になる。
 
+## 公開準備の状況（2026-10-26 時点）
+
+| 項目 | 状態 |
+|------|------|
+| GitHub リポ | `b4moss/calengine` を **public** で作成済み（まだ空。ミラー未着） |
+| GitHub Environment | `npm-publish` を作成済み。デプロイを許すのは **`v*` タグだけ** |
+| push mirror（Gitea → GitHub） | **未設定**。Gitea は SSH の push mirror に対応していないため、HTTPS と fine-grained PAT（対象は `b4moss/calengine` と `b4moss/harenohi` の 2 リポだけ、権限は Contents と Workflows の Read and write）で設定する予定。PAT の渡し方は未決 |
+| ミラー前の作業ブランチ | `chore/npmjs-publish-prep`・`cursor/ci-resume-132` をミラー前に消すかは未決 |
+| `NPM_TOKEN` / Trusted Publisher | 未作成・未登録（npm トークン、タグ、公開は PO の OK 待ち） |
+| 社内レジストリ | タグで社内 `npm-publish` がいっしょに動いても構わない（2026-10-26 PO）。同じ版が社内に既にあれば社内側は失敗する見込みで、npmjs 側には影響しない |
+
+### 初版のタグ（未決）
+
+既存タグ `v0.4.1` は `.github/workflows/publish.yml` が入る**前**のコミットを指す。そのため「今の版（`0.4.1`）のまま初版を出す」はタグでは動かない（`publish.yml` はタグが指すコミットの workflow で動き、`workflow_dispatch` も無い）。案:
+
+- **(a) パッチ版を上げる（おすすめ）**: `0.4.2` に版を揃えてから `v0.4.2` を打ち、これを npmjs の初版にする
+- **(b)** `publish.yml` に `workflow_dispatch` を足し、現行 `main` から `0.4.1` を出す
+- **(c)** 既存タグ `v0.4.1` を打ち直す（公開済みタグの付け替えになる）
+
+
 ## 既知の課題
 
 - 社内 `npm-publish` は secret `PACKAGE_REGISTRY_TOKEN` が未設定だと失敗する（過去タグ実行が失敗していた）
-- GitHub リポ `b4moss/calengine`・Environment `npm-publish`・ミラー・Trusted Publisher は公開日に別途設定する（このリポのコード準備とは別作業）
+- GitHub リポ `b4moss/calengine` と Environment `npm-publish` は作成済み。ミラー・`NPM_TOKEN`・Trusted Publisher は未設定（上の「公開準備の状況」）
 
 ----
 

@@ -29,6 +29,8 @@ npmjs.org へ `@b4moss/calengine` として公開することを決定（準備 
 - 公開は **GitHub Actions**（`.github/workflows/publish.yml`）＋ Trusted Publishing。初版のみ Environment secret `NPM_TOKEN`
 - 社内レジストリの `@b4m/calengine` は当面併存（`final-calendar` 移行は別タスク）
 - 同期は Gitea 正本 → GitHub push mirror（タグ含む）
+- 社内レジストリへの公開がタグでいっしょに動いても構わない（2026-10-26 追加決定）
+- 初版のタグは未決（既存 `v0.4.1` は `publish.yml` 導入前を指す）。案と現状は [ci-cd.md](../../specs/ci-cd.md) の「公開準備の状況」
 
 ## U-02 月末加算の丸め — 決定済み（2026-10-20 PO）
 

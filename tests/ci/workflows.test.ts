@@ -8,8 +8,12 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..', '..')
 const UPSTREAM_PR_SKIP_IF =
   "if: ${{ !(github.event_name == 'pull_request' && github.head_ref == 'develop' && github.base_ref == 'main') }}"
 
-function readWorkflow(name: string): string {
+function readGiteaWorkflow(name: string): string {
   return readFileSync(join(root, '.gitea', 'workflows', name), 'utf8')
+}
+
+function readGitHubWorkflow(name: string): string {
+  return readFileSync(join(root, '.github', 'workflows', name), 'utf8')
 }
 
 function between(yaml: string, start: string, end: string): string {
@@ -25,8 +29,9 @@ function between(yaml: string, start: string, end: string): string {
 }
 
 describe('CI workflow contract', () => {
-  const ci = readWorkflow('ci.yml')
-  const publish = readWorkflow('npm-publish.yml')
+  const ci = readGiteaWorkflow('ci.yml')
+  const publish = readGiteaWorkflow('npm-publish.yml')
+  const npmjs = readGitHubWorkflow('publish.yml')
 
   it('TC-CI-01: pull_request branches are main, develop, dev-*, cursor/**', () => {
     const pullRequest = between(ci, '  pull_request:', '  workflow_dispatch:')
@@ -105,5 +110,28 @@ describe('CI workflow contract', () => {
       return name
     })
     expect(triggers).toEqual(['push', 'workflow_dispatch'])
+  })
+
+  it('TC-CI-11: gitea npm-publish verifies version instead of rewriting it', () => {
+    expect(publish).toContain('Verify tag matches package.json version')
+    expect(publish).not.toMatch(/npm version /)
+    expect(publish).toContain("@b4m/calengine")
+    expect(publish).toContain('--registry')
+  })
+
+  it('TC-CI-12: GitHub publish.yml requires id-token write and SemVer tag trigger', () => {
+    expect(npmjs).toMatch(/^permissions:\n {2}contents: read\n {2}id-token: write\n/m)
+    const on = between(npmjs, '\non:', '\npermissions:')
+    expect(on).toMatch(/^ {2}push:\n {4}tags:\n {6}- 'v\[0-9\]\+\.\[0-9\]\+\.\[0-9\]\+'\s*$/m)
+    expect(npmjs).not.toMatch(/workflow_dispatch/)
+  })
+
+  it('TC-CI-13: GitHub publish.yml verifies tag vs package.json and publishes public with provenance', () => {
+    expect(npmjs).toContain('Verify tag matches package.json version')
+    expect(npmjs).not.toMatch(/npm version /)
+    expect(npmjs).toContain('environment: npm-publish')
+    expect(npmjs).toContain('registry-url: https://registry.npmjs.org')
+    expect(npmjs).toMatch(/npm publish --access public --provenance/)
+    expect(npmjs).toContain('NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}')
   })
 })

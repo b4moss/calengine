@@ -1,5 +1,10 @@
-# Publish @b4m/calengine to Gitea Packages (b4m-packages npm registry).
+# Publish @b4m/calengine to the internal Gitea Packages npm registry.
+# package.json name is @b4moss/calengine (npmjs); this workflow temporarily
+# rewrites name to @b4m/calengine and publishes with --registry.
 # Triggers on plain SemVer tags vX.Y.Z (suffix tags like v0.1.0-doc.1 are skipped).
+# The same tag also triggers GitHub Actions .github/workflows/publish.yml (npmjs)
+# after the Gitea → GitHub push mirror delivers the tag. The two publishes are
+# independent; a failure on one does not roll back the other.
 name: npm-publish
 
 on:
@@ -66,11 +71,23 @@ jobs:
         with:
           node-version: "24"
 
-      - name: Configure npm auth & version
+      - name: Verify tag matches package.json version
+        if: steps.meta.outputs.skip != 'true'
+        env:
+          VERSION: ${{ steps.meta.outputs.version }}
+        run: |
+          set -euo pipefail
+          PKG_VERSION="$(node -p "require('./package.json').version")"
+          if [[ "${PKG_VERSION}" != "${VERSION}" ]]; then
+            echo "Tag/version ${VERSION} does not match package.json version ${PKG_VERSION}" >&2
+            exit 1
+          fi
+          echo "Version ${VERSION} matches package.json"
+
+      - name: Configure npm auth for internal registry
         if: steps.meta.outputs.skip != 'true'
         env:
           PACKAGE_REGISTRY_TOKEN: ${{ secrets.PACKAGE_REGISTRY_TOKEN }}
-          VERSION: ${{ steps.meta.outputs.version }}
         run: |
           set -euo pipefail
           cat > .npmrc <<EOF
@@ -78,7 +95,6 @@ jobs:
           //git.b4m.jp/api/packages/b4m-packages/npm/:_authToken=${PACKAGE_REGISTRY_TOKEN}
           //git.b4m.jp/api/packages/b4m-packages/npm/:always-auth=true
           EOF
-          npm version "${VERSION}" --no-git-tag-version --allow-same-version
 
       - name: Install & build
         if: steps.meta.outputs.skip != 'true'
@@ -87,8 +103,15 @@ jobs:
           npm ci
           npm run build
 
-      - name: npm publish
+      - name: Publish as @b4m/calengine to internal registry
         if: steps.meta.outputs.skip != 'true'
         run: |
           set -euo pipefail
-          npm publish --access restricted
+          INTERNAL_REGISTRY="https://git.b4m.jp/api/packages/b4m-packages/npm/"
+          node <<'EOF'
+          const fs = require('node:fs');
+          const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          pkg.name = '@b4m/calengine';
+          fs.writeFileSync('package.json', `${JSON.stringify(pkg, null, 2)}\n`);
+          EOF
+          npm publish --access restricted --registry "${INTERNAL_REGISTRY}"

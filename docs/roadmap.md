@@ -12,7 +12,8 @@ timestamp: 2026-10-20
 ## 現状
 
 - v0.1.0〜v0.4.1 実装済み（社内レジストリ `@b4m/calengine`）
-- **2026-10-26**: npmjs.org 公開を決定（`@b4moss/calengine`）。準備は `chore/npmjs-publish-prep`。初版は現版 `0.4.1` のまま出す
+- **2026-10-26**: npmjs.org 公開を決定（`@b4moss/calengine`）。準備は `chore/npmjs-publish-prep`。初版は現版 `0.4.1` のまま出す方針。ただし既存タグ `v0.4.1` は `publish.yml` 導入前のコミットを指すため、初版のタグは未決（おすすめは patch を上げて `v0.4.2`。[specs/ci-cd.md](specs/ci-cd.md) の「公開準備の状況」）
+- GitHub `b4moss/calengine`（public、まだ空）と Environment `npm-publish` は作成済み。push mirror・npm トークン・公開は未実施（2026-10-26 時点）
 - 社内 `@b4m/calengine` は当面併存（`final-calendar` 移行は別タスク）
 - charter（OKF v0.1 / VERSION 1.2.0 相当）取り込み済み
 - PO 決定（2026-10-20 / 2026-10-26）反映済み

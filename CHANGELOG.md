@@ -2,11 +2,17 @@
 
 ## Unreleased
 
+## 0.4.2 — 2026-10-26
+
+### Notes
+
+- npmjs.org 公開の準備。公開名 `@b4moss/calengine`、MIT、GitHub Actions の `publish.yml` から公開。機能変更なし。
+
 ### Changed
 
-- npmjs.org 公開準備: パッケージ名を `@b4moss/calengine` に変更（MIT、`publishConfig.access: public`）。
+- パッケージ名を `@b4moss/calengine` に変更（MIT、`publishConfig.access: public`）。
 - GitHub Actions `.github/workflows/publish.yml` を追加（タグ `vX.Y.Z`、Trusted Publishing / provenance）。
-- 社内 Gitea レジストリ向け `@b4m/calengine` は当面併存（`.gitea/workflows/npm-publish.yml` が publish 直前に name を書き換え）。
+- 社内レジストリ向け `@b4m/calengine` は当面併存（`.gitea/workflows/npm-publish.yml` が publish 直前に name を書き換え）。
 - CI 内での `npm version` による版書き換えをやめ、タグと `package.json` の一致検査に変更。
 
 ## 0.4.1 — 2026-10-20

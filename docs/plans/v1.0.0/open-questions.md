@@ -22,7 +22,7 @@ PO レビューにより **2026-10-20** に確定。選択肢表は経緯のた�
 
 ### 追記 — npmjs.org 公開（2026-10-26 こうきさん決定）
 
-npmjs.org へ `@b4moss/calengine` として公開することを決定（準備 PR 時点の版は `0.4.1` のまま）。要点:
+npmjs.org へ `@b4moss/calengine` として公開することを決定。**決定（2026-10-26）：案 a、`0.4.2` で初回公開**。要点:
 
 - npm・GitHub リポとも **public**。`publishConfig.access: public`
 - ライセンス **MIT**
@@ -30,7 +30,7 @@ npmjs.org へ `@b4moss/calengine` として公開することを決定（準備 
 - 社内レジストリの `@b4m/calengine` は当面併存（`final-calendar` 移行は別タスク）
 - 同期は Gitea 正本 → GitHub push mirror（タグ含む）
 - 社内レジストリへの公開がタグでいっしょに動いても構わない（2026-10-26 追加決定）
-- 初版のタグは未決（既存 `v0.4.1` は `publish.yml` 導入前を指す）。案と現状は [ci-cd.md](../../specs/ci-cd.md) の「公開準備の状況」
+- **決定（2026-10-26）：案 a、`0.4.2` で初回公開**（既存 `v0.4.1` は `publish.yml` 導入前を指す）。経緯は [ci-cd.md](../../specs/ci-cd.md) の「公開準備の状況」
 
 ## U-02 月末加算の丸め — 決定済み（2026-10-20 PO）
 

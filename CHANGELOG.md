@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+## 0.4.3 — 2026-10-27
+
+### Notes
+
+- GitHub の push mirror（`git push --mirror`）はタグの push イベントを作らないため、`publish.yml` はミラー後に `workflow_dispatch` で手動実行する。`0.4.2` は社内レジストリのみ公開済み。機能変更なし。
+
+### Changed
+
+- `.github/workflows/publish.yml` に `workflow_dispatch` を追加（タグ `vX.Y.Z` 以外の ref、および `package.json` と不一致のタグは拒否）。
+
 ## 0.4.2 — 2026-10-26
 
 ### Notes

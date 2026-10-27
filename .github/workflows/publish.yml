@@ -1,11 +1,14 @@
 # Publish @b4moss/calengine to npmjs.org (Trusted Publishing / OIDC).
-# Triggers only on plain SemVer tags vX.Y.Z.
+# Triggers on plain SemVer tags vX.Y.Z (push), or manual workflow_dispatch
+# with --ref vX.Y.Z (needed because Gitea→GitHub git push --mirror does not
+# create tag push events that start Actions).
 name: publish
 
 on:
   push:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -46,14 +49,22 @@ jobs:
       - name: Verify tag matches package.json version
         run: |
           set -euo pipefail
+          REF="${GITHUB_REF}"
           TAG="${GITHUB_REF_NAME}"
+          EVENT="${GITHUB_EVENT_NAME}"
+          # Push tag triggers and workflow_dispatch --ref vX.Y.Z both set
+          # github.ref to refs/tags/vX.Y.Z (GITHUB_REF_NAME = vX.Y.Z).
+          if [[ ! "${REF}" =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Ref ${REF} is not a plain SemVer tag refs/tags/vX.Y.Z (event=${EVENT})" >&2
+            exit 1
+          fi
           VERSION="$(node -p "require('./package.json').version")"
           EXPECTED="v${VERSION}"
           if [[ "${TAG}" != "${EXPECTED}" ]]; then
             echo "Tag ${TAG} does not match package.json version ${VERSION} (expected ${EXPECTED})" >&2
             exit 1
           fi
-          echo "Tag ${TAG} matches package.json version ${VERSION}"
+          echo "Tag ${TAG} matches package.json version ${VERSION} (event=${EVENT})"
 
       - name: Install
         run: npm ci

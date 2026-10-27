@@ -1,6 +1,6 @@
 {
   "name": "@b4moss/calengine",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "UI-agnostic calendar date math, grids, and event layout for B4M products.",
   "type": "module",
   "license": "MIT",

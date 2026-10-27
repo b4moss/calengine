@@ -22,8 +22,8 @@ timestamp: 2026-10-26
 | TC-CI-09 | 制約 | `ci.yml` | E2E（e2e / playwright）を含まない。手動実行は `workflow_dispatch` |
 | TC-CI-10 | 制約 | `npm-publish.yml` `on` | `push.tags: 'v*'` と `workflow_dispatch` のみ。`pull_request` は無い |
 | TC-CI-11 | 正常 | `npm-publish.yml` | 版の一致検査あり、`npm version` なし、`@b4m/calengine` と `--registry` あり |
-| TC-CI-12 | 正常 | `publish.yml` | `id-token: write`、タグ `v[0-9]+.[0-9]+.[0-9]+` のみ、`workflow_dispatch` なし |
-| TC-CI-13 | 正常 | `publish.yml` | 版一致検査、`environment: npm-publish`、`npm publish --access public --provenance`、`NPM_TOKEN` |
+| TC-CI-12 | 正常 | `publish.yml` | `id-token: write`、タグ `v[0-9]+.[0-9]+.[0-9]+` の push と `workflow_dispatch` |
+| TC-CI-13 | 正常 | `publish.yml` | SemVer タグ以外拒否・版一致検査、`environment: npm-publish`、`npm publish --access public --provenance`、`NPM_TOKEN` |
 
 ----
 

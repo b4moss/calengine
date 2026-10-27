@@ -119,15 +119,24 @@ describe('CI workflow contract', () => {
     expect(publish).toContain('--registry')
   })
 
-  it('TC-CI-12: GitHub publish.yml requires id-token write and SemVer tag trigger', () => {
+  it('TC-CI-12: GitHub publish.yml requires id-token write, SemVer tag push, and workflow_dispatch', () => {
     expect(npmjs).toMatch(/^permissions:\n {2}contents: read\n {2}id-token: write\n/m)
     const on = between(npmjs, '\non:', '\npermissions:')
     expect(on).toMatch(/^ {2}push:\n {4}tags:\n {6}- 'v\[0-9\]\+\.\[0-9\]\+\.\[0-9\]\+'\s*$/m)
-    expect(npmjs).not.toMatch(/workflow_dispatch/)
+    expect(on).toMatch(/^ {2}workflow_dispatch:\s*$/m)
+    const triggers = [...on.matchAll(/^ {2}([a-z_]+):/gm)].map((match) => {
+      const name = match[1]
+      if (name === undefined) {
+        throw new Error('missing trigger name')
+      }
+      return name
+    })
+    expect(triggers).toEqual(['push', 'workflow_dispatch'])
   })
 
   it('TC-CI-13: GitHub publish.yml verifies tag vs package.json and publishes public with provenance', () => {
     expect(npmjs).toContain('Verify tag matches package.json version')
+    expect(npmjs).toContain('refs/tags/v[0-9]+\\.[0-9]+\\.[0-9]+')
     expect(npmjs).not.toMatch(/npm version /)
     expect(npmjs).toContain('environment: npm-publish')
     expect(npmjs).toContain('registry-url: https://registry.npmjs.org')

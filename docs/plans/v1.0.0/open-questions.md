@@ -31,6 +31,7 @@ npmjs.org へ `@b4moss/calengine` として公開することを決定。**決�
 - 同期は Gitea 正本 → GitHub push mirror（タグ含む）
 - 社内レジストリへの公開がタグでいっしょに動いても構わない（2026-10-26 追加決定）
 - **決定（2026-10-26）：案 a、`0.4.2` で初回公開**（既存 `v0.4.1` は `publish.yml` 導入前を指す）。経緯は [ci-cd.md](../../specs/ci-cd.md) の「公開準備の状況」
+- **決定（2026-10-27）**: `git push --mirror` はタグ push イベントを作らないため、npmjs 公開はミラー後に `gh workflow run publish.yml --ref vX.Y.Z -R b4moss/calengine`（`workflow_dispatch`）。`0.4.2` は社内レジストリのみ。npmjs 向けは `0.4.3`
 
 ## U-02 月末加算の丸め — 決定済み（2026-10-20 PO）
 
